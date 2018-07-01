@@ -31,9 +31,7 @@ public class WorkerTest {
 		
 	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
+
 
 	@Before
 	public void setUp() throws Exception {
@@ -41,9 +39,7 @@ public class WorkerTest {
 		
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
+
 
 	@Ignore
 	@Test
@@ -53,7 +49,6 @@ public class WorkerTest {
 
 	@Test
 	public void testRun() {
-		//new Thread(worker).start();
 		worker.run();
 		assertEquals(1,Factory.getTotalProducts().get());
 	}
