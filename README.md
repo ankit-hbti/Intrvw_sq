@@ -4,7 +4,7 @@ Section 1
 
 	Name: Ankit Agarwal
 
-	Years of Experience: 11.8.
+	Years of Experience: 11.8
 
 Section 2
 
