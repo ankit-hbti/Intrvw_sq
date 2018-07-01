@@ -52,6 +52,8 @@ public class Worker implements Runnable {
 						consumeFlag = true;
 					}
 					if (!consumeFlag) {
+						if((collectedParts.get().getNoOfMachines() >= 1)&&(!queue.contains(new Bolt()))||((collectedParts.get().getNoOfBolts() >= 2)&&(!queue.contains(new Machine()))))
+							break;
 						queue.put(mp);
 					}
 					System.out.println(workerName + " has " + collectedParts.get().getNoOfMachines() + " machine and "
@@ -59,7 +61,7 @@ public class Worker implements Runnable {
 					if ((collectedParts.get().getNoOfMachines() >= 1) && (collectedParts.get().getNoOfBolts() >= 2))
 						break;
 				} while ((!queue.isEmpty())
-						&& !(collectedParts.get().getNoOfMachines() > 1 && collectedParts.get().getNoOfBolts() == 2));
+						&& !(collectedParts.get().getNoOfMachines() == 1 && collectedParts.get().getNoOfBolts() == 2));
 				if ((collectedParts.get().getNoOfMachines() >= 1) && (collectedParts.get().getNoOfBolts() >= 2)) {
 					System.out.println(workerName + " is assembling the product");
 					collectedParts.get().setNoOfMachines(collectedParts.get().getNoOfMachines() - 1);
