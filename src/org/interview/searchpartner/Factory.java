@@ -21,7 +21,7 @@ public class Factory {
 		System.out.println("Number of Machines: "+noOfMachines);
 		System.out.println("Number Of Bolts:  "+noOfBolts);
 		System.out.println("Time taken to assemble a machine in seconds:  "+timeInSecondsToCompleteTheJob);
-		BlockingQueue<MachineParts> queue = new ArrayBlockingQueue<MachineParts>(noOfMachines + noOfBolts);
+		BlockingQueue<MachineParts> queue = new ArrayBlockingQueue<>(noOfMachines + noOfBolts);
 		Producer producer = new Producer("Producer", noOfMachines, noOfBolts, queue);
 		new Thread(producer).start();
 		double startTime=System.currentTimeMillis();

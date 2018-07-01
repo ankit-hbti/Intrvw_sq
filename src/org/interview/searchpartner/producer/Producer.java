@@ -41,7 +41,6 @@ public class Producer implements Runnable {
 			} while (noOfMachines > 0 || noOfBolts > 0);
 
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

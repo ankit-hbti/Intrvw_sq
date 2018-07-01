@@ -37,7 +37,7 @@ public class Worker implements Runnable {
 
 	private void processCommand() {
 		try {
-			if (queue.size() > 0) {
+			if (!queue.isEmpty()) {
 				do {
 					MachineParts mp = queue.take();
 					boolean consumeFlag = false;
@@ -58,7 +58,7 @@ public class Worker implements Runnable {
 							+ collectedParts.get().getNoOfBolts()+" bolts");
 					if ((collectedParts.get().getNoOfMachines() >= 1) && (collectedParts.get().getNoOfBolts() >= 2))
 						break;
-				} while ((queue.size() > 0)
+				} while ((!queue.isEmpty())
 						&& !(collectedParts.get().getNoOfMachines() > 1 && collectedParts.get().getNoOfBolts() == 2));
 				if ((collectedParts.get().getNoOfMachines() >= 1) && (collectedParts.get().getNoOfBolts() >= 2)) {
 					System.out.println(workerName + " is assembling the product");

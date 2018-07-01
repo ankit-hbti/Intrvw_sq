@@ -1,6 +1,6 @@
 package org.interview.searchpartner.worker;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -8,11 +8,8 @@ import java.util.concurrent.BlockingQueue;
 import org.interview.searchpartner.Factory;
 import org.interview.searchpartner.bean.MachineParts;
 import org.interview.searchpartner.producer.Producer;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class WorkerTest {
@@ -39,13 +36,6 @@ public class WorkerTest {
 		
 	}
 
-
-
-	@Ignore
-	@Test
-	public void testWorker() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testRun() {
