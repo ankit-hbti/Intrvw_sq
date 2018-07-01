@@ -24,7 +24,7 @@ public class Factory {
 					"Please provide a valid space seperated input by mentioning number of Machines, no of Bolts and Time taken in seconds to assemble the product");
 			System.out.println("Proceeding with default values as of now with the following : ");
 			System.out.println("Number of Machines : " + noOfMachines);
-			System.out.println("Number of Bolts : " + noOfMachines);
+			System.out.println("Number of Bolts : " + noOfBolts);
 			System.out.println("Time taken to assemble a machine in seconds : " + timeInSecondsToCompleteTheJob);
 		}
 
