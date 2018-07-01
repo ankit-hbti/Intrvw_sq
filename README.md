@@ -36,7 +36,7 @@ Section 4
 
 Note:
 
-	Factory is the main class. Please run it by giving space separated input by mentioning number of Machines, no of Bolts and Time in seconds to assemble    	the product.
+	Factory is the main class. Please run it by giving space separated input by mentioning number of Machines, no of Bolts and Time taken in seconds to assemble    	the product.
 
 	e.g.
 	java org.interview.searchpartner.Factory 3 6 60
