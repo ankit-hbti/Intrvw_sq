@@ -15,13 +15,14 @@ public class Factory {
 	private static AtomicInteger totalProducts = new AtomicInteger(0);
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		int noOfMachines = Integer.parseInt(args[0]);
 		int noOfBolts = Integer.parseInt(args[1]);
 		int timeInSecondsToCompleteTheJob = Integer.parseInt(args[2]);
-		System.out.println("Number of Machines: "+noOfMachines+"/n Number Of Bolts:  "+noOfBolts+"/n Time taken to assemble a machine in seconds:  "+timeInSecondsToCompleteTheJob);
+		System.out.println("Number of Machines: "+noOfMachines);
+		System.out.println("Number Of Bolts:  "+noOfBolts);
+		System.out.println("Time taken to assemble a machine in seconds:  "+timeInSecondsToCompleteTheJob);
 		BlockingQueue<MachineParts> queue = new ArrayBlockingQueue<MachineParts>(noOfMachines + noOfBolts);
-		Producer producer = new Producer("Produce", noOfMachines, noOfBolts, queue);
+		Producer producer = new Producer("Producer", noOfMachines, noOfBolts, queue);
 		new Thread(producer).start();
 		double startTime=System.currentTimeMillis();
 		System.out.println("Start Time: "+startTime);

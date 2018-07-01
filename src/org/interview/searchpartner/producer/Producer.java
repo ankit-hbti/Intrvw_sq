@@ -8,13 +8,13 @@ import org.interview.searchpartner.bean.MachineParts;
 
 public class Producer implements Runnable {
 
-	private String command;
+	private String name;
 	private int noOfMachines = 0;
 	private int noOfBolts = 0;
 	private BlockingQueue<MachineParts> queue = null;
 
 	public Producer(String s, int noOfMachines, int noOfBolts, BlockingQueue<MachineParts> queue) {
-		this.command = s;
+		this.name = s;
 		this.noOfMachines = noOfMachines;
 		this.noOfBolts = noOfBolts;
 		this.queue = queue;
@@ -22,9 +22,9 @@ public class Producer implements Runnable {
 
 	@Override
 	public void run() {
-		System.out.println(Thread.currentThread().getName() + " Start. Command = " + command);
+		System.out.println(name+" has started");
 		processCommand();
-		System.out.println(Thread.currentThread().getName() + " End.");
+		System.out.println(name + " has finished the work");
 	}
 
 	private void processCommand() {
@@ -48,6 +48,6 @@ public class Producer implements Runnable {
 
 	@Override
 	public String toString() {
-		return this.command;
+		return this.name;
 	}
 }
