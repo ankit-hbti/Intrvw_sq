@@ -14,9 +14,9 @@ Section 2
 
 Section 3 
 
-	Sonar lint / EclEmma scan Snapshot : 
-	Final Output Snapshot : 
-	Junit Coverage Snapshot : 
+	Sonar lint scan Snapshot : https://github.com/ankit-hbti/Intrvw_sq/blob/master/images/SonarReport.png
+	Final Output Snapshot : https://github.com/ankit-hbti/Intrvw_sq/blob/master/images/FinalOutput.png
+	Junit Coverage Snapshot : https://github.com/ankit-hbti/Intrvw_sq/blob/master/images/CodeCoverage.png
 
 
 Section 4 
