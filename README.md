@@ -34,5 +34,13 @@ Section 4
 	WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 	
 	CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+Note:
+
+	Factory is the main class. Please run it by giving space separated input by mentioning number of Machines, no of Bolts and Time in seconds to assemble    	the product.
+
+	e.g.
+	java org.interview.searchpartner.Factory 3 6 60
+	
+
 
 
