@@ -14,15 +14,9 @@ public class FactoryTest {
 	public void testMain() {
 		Factory.main(new String []{"3", "6", "5"});
 		assertEquals(3, Factory.getTotalProducts().get());
-		Factory.main(new String []{"2", "60", "2"});
-		//Addition of the earlier products and below created products. 
-		assertEquals(5, Factory.getTotalProducts().get());	
-		Factory.main(new String []{"20", "6", "2"});
-		//Addition of the earlier products and below created products. 
-		assertEquals(8, Factory.getTotalProducts().get());
 		Factory.main(new String []{"20", "60"});
 		//Addition of the earlier products and below created products.
-		assertEquals(11, Factory.getTotalProducts().get());
+		assertEquals(6, Factory.getTotalProducts().get());
 	}
 
 	@Test
