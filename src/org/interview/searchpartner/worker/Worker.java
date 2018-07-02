@@ -51,9 +51,10 @@ public class Worker implements Runnable {
 						System.out.println(workerName + " has picked up the " + mp.getClass().getSimpleName());
 						consumeFlag = true;
 					}
+					if((collectedParts.get().getNoOfMachines() >= 1)&&(!queue.contains(new Bolt()))||((collectedParts.get().getNoOfBolts() >= 2)&&(!queue.contains(new Machine()))))
+						break;
 					if (!consumeFlag) {
-						if((collectedParts.get().getNoOfMachines() >= 1)&&(!queue.contains(new Bolt()))||((collectedParts.get().getNoOfBolts() >= 2)&&(!queue.contains(new Machine()))))
-							break;
+
 						queue.put(mp);
 					}
 					System.out.println(workerName + " has " + collectedParts.get().getNoOfMachines() + " machine and "

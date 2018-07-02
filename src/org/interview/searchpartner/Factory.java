@@ -23,9 +23,6 @@ public class Factory {
 			System.out.println(
 					"Please provide a valid space seperated input by mentioning number of Machines, no of Bolts and Time taken in seconds to assemble the product");
 			System.out.println("Proceeding with default values as of now with the following : ");
-			System.out.println("Number of Machines : " + noOfMachines);
-			System.out.println("Number of Bolts : " + noOfBolts);
-			System.out.println("Time taken to assemble a machine in seconds : " + timeInSecondsToCompleteTheJob);
 		}
 
 		else {
@@ -34,6 +31,21 @@ public class Factory {
 				noOfMachines = Integer.parseInt(args[0]);
 				noOfBolts = Integer.parseInt(args[1]);
 				timeInSecondsToCompleteTheJob = Integer.parseInt(args[2]);
+
+				if (noOfMachines < 0) {
+					System.out.println("Number of machines can't be negative. Exiting...");
+					System.exit(0);
+				}
+
+				if (noOfBolts < 0) {
+					System.out.println("Number of bolts can't be negative. Exiting...");
+					System.exit(0);
+				}
+
+				if (timeInSecondsToCompleteTheJob < 0) {
+					System.out.println("Time taken to assemble a machine can't be negative. Exiting...");
+					System.exit(0);
+				}
 			} catch (NumberFormatException e) {
 				System.out.println("Please provise a valid input");
 			}
