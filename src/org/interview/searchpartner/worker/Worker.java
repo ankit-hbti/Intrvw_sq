@@ -29,9 +29,9 @@ public class Worker implements Runnable {
 	@Override
 	public void run() {
 		System.out.println(workerName + " has started.");
-		do {
-			processCommand();
-		} while (!queue.isEmpty());
+
+		processCommand();
+
 		System.out.println(workerName + "  has ended.");
 	}
 
@@ -39,30 +39,45 @@ public class Worker implements Runnable {
 		try {
 			if (!queue.isEmpty()) {
 				do {
+					if ((collectedParts.get().getNoOfBolts() < 2) && (!queue.contains(new Bolt()))) {
+						if (collectedParts.get().getNoOfBolts() == 1) {
+							queue.put(new Bolt());
+							collectedParts.get().setNoOfBolts(collectedParts.get().getNoOfBolts() - 1);
+
+						}
+						break;
+
+					}
+					if ((collectedParts.get().getNoOfMachines() < 1) && (!queue.contains(new Machine()))) {
+						break;
+
+					}
 					MachineParts mp = queue.take();
 					boolean consumeFlag = false;
-					if ((collectedParts.get().getNoOfMachines() < 1) && (mp instanceof Machine)) {
+
+					if ((collectedParts.get().getNoOfMachines() < 1) && (mp instanceof Machine)
+							&& (collectedParts.get().getNoOfBolts() <= 2)) {
 						collectedParts.get().setNoOfMachines(collectedParts.get().getNoOfMachines() + 1);
 						System.out.println(workerName + " has picked up the " + mp.getClass().getSimpleName());
 						consumeFlag = true;
 					}
-					if ((collectedParts.get().getNoOfBolts() < 2) && (mp instanceof Bolt)) {
+					if ((collectedParts.get().getNoOfBolts() < 2) && (mp instanceof Bolt)
+							&& (collectedParts.get().getNoOfMachines() <= 1)) {
 						collectedParts.get().setNoOfBolts(collectedParts.get().getNoOfBolts() + 1);
 						System.out.println(workerName + " has picked up the " + mp.getClass().getSimpleName());
 						consumeFlag = true;
 					}
-					if((collectedParts.get().getNoOfMachines() >= 1)&&(!queue.contains(new Bolt()))||((collectedParts.get().getNoOfBolts() >= 2)&&(!queue.contains(new Machine()))))
-						break;
+					System.out.println(workerName + " has " + collectedParts.get().getNoOfMachines() + " machine and "
+							+ collectedParts.get().getNoOfBolts() + " bolts");
 					if (!consumeFlag) {
 
 						queue.put(mp);
 					}
-					System.out.println(workerName + " has " + collectedParts.get().getNoOfMachines() + " machine and "
-							+ collectedParts.get().getNoOfBolts()+" bolts");
+
 					if ((collectedParts.get().getNoOfMachines() >= 1) && (collectedParts.get().getNoOfBolts() >= 2))
 						break;
 				} while ((!queue.isEmpty())
-						&& !(collectedParts.get().getNoOfMachines() == 1 && collectedParts.get().getNoOfBolts() == 2));
+						&& !(collectedParts.get().getNoOfMachines() >= 1 && collectedParts.get().getNoOfBolts() >= 2));
 				if ((collectedParts.get().getNoOfMachines() >= 1) && (collectedParts.get().getNoOfBolts() >= 2)) {
 					System.out.println(workerName + " is assembling the product");
 					collectedParts.get().setNoOfMachines(collectedParts.get().getNoOfMachines() - 1);
