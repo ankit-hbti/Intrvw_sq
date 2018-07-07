@@ -17,12 +17,12 @@ public class FactoryTest {
  		Factory.main(new String []{"2", "60", "2"});
  		//Addition of the earlier products and below created products. 
  		assertEquals(5, Factory.getTotalProducts().get());	
- 		Factory.main(new String []{"20", "7", "2"});
+ 		Factory.main(new String []{"20", "10", "2"});
 		//Addition of the earlier products and below created products. 
-		assertEquals(8, Factory.getTotalProducts().get());
+		assertEquals(10, Factory.getTotalProducts().get());
 		Factory.main(new String []{"20", "60"});
 		//Addition of the earlier products and below created products.
-		assertEquals(11, Factory.getTotalProducts().get());
+		assertEquals(15, Factory.getTotalProducts().get());
 	}
 
 	@Test
