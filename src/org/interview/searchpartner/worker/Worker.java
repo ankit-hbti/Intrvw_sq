@@ -37,47 +37,66 @@ public class Worker implements Runnable {
 
 	private void processCommand() {
 		try {
-			outer:
-				do {
+			outer: do {
 
-				
 				if (!queue.isEmpty()) {
 					do {
-						if ((collectedParts.get().getNoOfBolts() < 2) && (!queue.contains(new Bolt()))) {
-							if (collectedParts.get().getNoOfBolts() == 1) {
-								queue.put(new Bolt());
-								collectedParts.get().setNoOfBolts(collectedParts.get().getNoOfBolts() - 1);
+
+						synchronized (queue) {
+
+							if ((collectedParts.get().getNoOfBolts() < 2) && (!queue.contains(new Bolt()))) {
+								if (collectedParts.get().getNoOfBolts() == 1) {
+									queue.put(new Bolt());
+									collectedParts.get().setNoOfBolts(collectedParts.get().getNoOfBolts() - 1);
+
+								}
+								break outer;
 
 							}
-							break outer;
+							if ((collectedParts.get().getNoOfMachines() < 1) && (!queue.contains(new Machine()))) {
+								break outer;
 
-						}
-						if ((collectedParts.get().getNoOfMachines() < 1) && (!queue.contains(new Machine()))) {
-							break outer;
+							}
 
+							MachineParts mp = queue.poll();
+							boolean consumeFlag = false;
+							if (null != mp) {
+
+								System.out.println(
+										workerName + " has " + mp.getClass().getSimpleName() + " for him to pick");
+
+								if ((collectedParts.get().getNoOfMachines() < 1) && (mp instanceof Machine)
+										&& (collectedParts.get().getNoOfBolts() <= 2)) {
+									collectedParts.get().setNoOfMachines(collectedParts.get().getNoOfMachines() + 1);
+									System.out.println(
+											workerName + " has picked up the " + mp.getClass().getSimpleName());
+									consumeFlag = true;
+								}
+								if ((collectedParts.get().getNoOfBolts() < 2) && (mp instanceof Bolt)
+										&& (collectedParts.get().getNoOfMachines() <= 1)) {
+									collectedParts.get().setNoOfBolts(collectedParts.get().getNoOfBolts() + 1);
+									System.out.println(
+											workerName + " has picked up the " + mp.getClass().getSimpleName());
+									consumeFlag = true;
+								}
+
+							}
+
+							else {
+								System.out.println(workerName + " has nothing  for him to pick");
+								break outer;
+							}
+							if (!consumeFlag) {
+
+								System.out.println(workerName + " didn't pick up  " + mp.getClass().getSimpleName());
+
+								queue.put(mp);
+
+							}
 						}
 
-						MachineParts mp = queue.take();
-						boolean consumeFlag = false;
-
-						if ((collectedParts.get().getNoOfMachines() < 1) && (mp instanceof Machine)
-								&& (collectedParts.get().getNoOfBolts() <= 2)) {
-							collectedParts.get().setNoOfMachines(collectedParts.get().getNoOfMachines() + 1);
-							System.out.println(workerName + " has picked up the " + mp.getClass().getSimpleName());
-							consumeFlag = true;
-						}
-						if ((collectedParts.get().getNoOfBolts() < 2) && (mp instanceof Bolt)
-								&& (collectedParts.get().getNoOfMachines() <= 1)) {
-							collectedParts.get().setNoOfBolts(collectedParts.get().getNoOfBolts() + 1);
-							System.out.println(workerName + " has picked up the " + mp.getClass().getSimpleName());
-							consumeFlag = true;
-						}
 						System.out.println(workerName + " has " + collectedParts.get().getNoOfMachines()
 								+ " machine and " + collectedParts.get().getNoOfBolts() + " bolts");
-						if (!consumeFlag) {
-
-							queue.put(mp);
-						}
 
 						if ((collectedParts.get().getNoOfMachines() >= 1) && (collectedParts.get().getNoOfBolts() >= 2))
 							break;
@@ -91,6 +110,7 @@ public class Worker implements Runnable {
 						System.out.println(workerName + " has assembled the product");
 						Factory.getTotalProducts().incrementAndGet();
 					}
+
 				}
 			} while (!queue.isEmpty());
 
